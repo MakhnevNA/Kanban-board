@@ -1,0 +1,269 @@
+@charset "UTF-8";
+
+/* обнуление*/
+* {padding: 0;margin: 0;border: 0;}
+*,*:before,*:after {-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;}
+:focus,:active {outline: none;}
+a:focus,a:active {outline: none;}
+nav,footer,header,aside {display: block;}
+html,body {height: 100%;width: 100%;font-size: 100%;line-height: 1;font-size: 14px;-ms-text-size-adjust: 100%;-moz-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;}
+input,button,textarea {font-family: inherit;}
+input::-ms-clear {display: none;}/*крестик в поле для ввода в  интернете explorer*/
+button {cursor: pointer;}
+button::moz-focus-inner {padding: 0;border: 0;}
+a,a:visited {text-decoration: none;}
+a:hover {text-decoration: none;}
+ul li {list-style: none;}
+img {vertical-align: top;}
+h1,h2,h3,h4,h5,h6 {	font-size: inherit;	font-weight: 400;}
+
+/*                                                                                            */
+.wrapper{
+	background-color: rgb(234, 147, 17);
+}
+
+.container {
+	max-width: 1052px; 
+	margin: 0 auto;
+	min-height: 700px;
+
+
+	display: flex;
+	/* justify-content: space-between; */
+	flex-wrap: wrap;
+	padding-top: 40px;
+	position: relative;
+	top: 0;
+	left: 0;
+
+
+}
+
+
+
+.global__option-addthis{
+	cursor: pointer;
+	/* margin: 15px 15px; */
+	position: absolute;
+	top: 10px;
+	left: 50%;
+
+}
+
+.global__option-addthis .icon-addthis{
+	color: rgb(30, 19, 19);
+	font-size: 28px;
+	display: block;
+	cursor: pointer;
+	/* margin: 15px 15px; */
+
+}
+
+
+.card__item{
+	border: 2px solid green;
+	max-height: 420px;
+	min-height: 213px;
+	height: 100%;
+	width: 311px;
+	margin: 15px;
+	background-color: rgb(230, 230, 230);
+	display: flex; 
+	
+	flex-direction: column; 
+}
+
+@media (max-width:1025px){
+	.card__item{
+		max-width: 481px;
+		flex: 1 1 auto;
+
+	}
+	
+}
+
+@media (max-width:768px){
+	.card__item{
+		max-width: none;
+		width: 100%;
+		flex: 1 1 auto;
+
+	}
+	
+}
+
+
+
+.card__title{
+	background: rgb(72, 72, 227);
+	height: 50px;
+	display: flex;
+	width: 100% ;
+
+	justify-content: center;
+	align-items: center; 
+	flex: 0 0 50px;
+	position: relative;
+	
+}
+
+
+.card__option {
+	opacity: 1;
+	transition: opacity 0.3s;
+	margin: 0 15px 0 0;
+	position: absolute;
+	right: 0;
+
+}
+
+
+.card__name{
+	font-size: 22px;
+	margin: 0 10px 0 10px;
+	overflow: hidden;
+
+}
+
+.card__title:hover .card__option{
+	opacity: 1;
+	
+
+
+
+	
+}
+
+.card__option div:not(:last-child){
+	margin: 0 10px 0 0;
+}
+.card__option div{
+	display: inline-block;
+	color:rgba(150, 150, 150, 0.6);
+	cursor: pointer;
+}
+
+.card__option div:hover {
+		color: #ff6550;
+		
+}
+
+.card__option-color {
+	width: 14px;
+	height: 14px;
+	position: relative;
+	top: 0;
+
+}
+
+.card__option-color input{
+	cursor: pointer;
+	opacity: 0;
+	width: 14px;
+	height: 14px;
+	position: absolute;
+	top: 0;
+	left: 0px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.card__content{
+	overflow: auto;
+	margin: 0 0 20px 0;
+}
+.card__content::-webkit-scrollbar {
+	background-color: rgb(230, 230, 230);
+	width: 10px;
+}
+
+.card__content::-webkit-scrollbar-button {
+	background-color: rgb(230, 230, 230);
+	display: none;
+}
+
+
+.card__content::-webkit-scrollbar-thumb{
+	background-color: rgb(175, 175, 175);
+	border-radius: 8px;
+	
+}
+
+
+
+.card__text{
+	background-color: #ffffff;
+	height: 60px;
+	padding: 0 15px;
+	margin: 10px 15px 0px 10px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border: 1px solid #ffffff;
+	border-radius: 5px;
+	position: relative;
+	cursor: move;	
+}
+
+
+.card__text p{
+	font-size: 18px;
+}
+
+
+.card__text-active {
+	position: absolute;
+	right: 0;
+	margin: 0 15px 0 0;
+	color: #ff6550;
+	opacity: 0;
+	transition: all 0.5s;
+}
+
+.card__text-active div{
+	display: inline-block;
+	max-height: 100%;
+	max-width: 100%;
+	cursor:pointer;
+	padding: 1px;
+}
+
+.card__text-active div:not(:last-child){
+	margin: 0 10px 0 0;
+}
+
+
+
+.card__text:hover .card__text-active {
+	color: #ff6550;
+	opacity: 1;
+}
+
+
+
+
+.icon-addthis,
+.icon-pencil,
+.icon-bin,
+.icon-color_lens{
+	font-size: 14px;
+}
+
+
+.card__text.dragging{
+	opacity: 0.5;
+}
+
+.card__text:hover.dragging .card__text-active {
+	opacity: 0;
+	transform: opacity 0s;
+}
