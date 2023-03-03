@@ -23,10 +23,10 @@ h1,h2,h3,h4,h5,h6 {	font-size: inherit;	font-weight: 400;}
 }
 
 .container {
-	max-width: 1052px; 
+	max-width: 1400px; 
 	margin: 0 auto;
 	min-height: 700px;
-
+	border: 1px solid red;
 
 	display: flex;
 	/* justify-content: space-between; */
@@ -65,22 +65,26 @@ h1,h2,h3,h4,h5,h6 {	font-size: inherit;	font-weight: 400;}
 	max-height: 420px;
 	min-height: 213px;
 	height: 100%;
-	width: 311px;
+	width: 436px;
+	flex: 1 1 auto;
+	
+	/* max-width: 662px; */
 	margin: 15px;
 	background-color: rgb(230, 230, 230);
 	display: flex; 
-	
 	flex-direction: column; 
 }
 
 @media (max-width:1025px){
 	.card__item{
-		max-width: 481px;
-		flex: 1 1 auto;
-
+		flex: 1 1 100%;
 	}
 	
 }
+
+
+
+
 
 @media (max-width:768px){
 	.card__item{
@@ -109,12 +113,19 @@ h1,h2,h3,h4,h5,h6 {	font-size: inherit;	font-weight: 400;}
 
 
 .card__option {
-	opacity: 1;
+	opacity: 0;
 	transition: opacity 0.3s;
 	margin: 0 15px 0 0;
 	position: absolute;
 	right: 0;
 
+
+}
+
+@media (max-width: 768px) {
+	.card__option{
+		opacity: 1;
+	}
 }
 
 
@@ -127,10 +138,6 @@ h1,h2,h3,h4,h5,h6 {	font-size: inherit;	font-weight: 400;}
 
 .card__title:hover .card__option{
 	opacity: 1;
-	
-
-
-
 	
 }
 
