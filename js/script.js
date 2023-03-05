@@ -1,6 +1,8 @@
 'use strict'
 
+
 window.addEventListener('DOMContentLoaded', () => {
+
 	
 	const parent = document.querySelector('.container'),
 		globalAdd = document.querySelector('.global__option-addthis');
@@ -19,89 +21,75 @@ window.addEventListener('DOMContentLoaded', () => {
 		cardText = document.querySelectorAll('.card__text'),
 		nameItem = document.querySelectorAll('.card__name'),
 		cardTitle = document.querySelectorAll('.card__title'),
-		input = document.querySelectorAll('.card__option-color input');
-	
-	
-	// let tasks = [];
-	// let itemCard = [];
-
+		input = document.querySelectorAll('.card__option-color input'),
+		itemCard = [];
 	
 
-		// если в lS есть какие-то данные, то мы их от туда поулчим и запишем в наш массив
+	// если в lS есть какие-то данные, то мы их от туда поулчим и запишем в наш массив
 	
-	// if (localStorage.getItem('itemCard')) {
-	// 	itemCard = JSON.parse(localStorage.getItem('itemCard'));
-	// 	cardContent = document.querySelectorAll('.card__content');
-	// }
+	if (localStorage.getItem('itemCard')) {
+		itemCard = JSON.parse(localStorage.getItem('itemCard'));
+		cardContent = document.querySelectorAll('.card__content');
+		console.log(itemCard.children)
+	}
 	
-	
-	// if (localStorage.getItem('tasks')) {
-	// 	tasks = JSON.parse(localStorage.getItem('tasks'));
-	// 	cardContent = document.querySelectorAll('.card__content');
-	// }
+	// отображаем на странице данные из массива с карточками
 
-	
+	itemCard.forEach((task, i) => {
+		const newList = document.createElement('div');
+		newList.classList.add('card__item');
+		newList.setAttribute('id', `${task.id}`); // добавили нашему пункту id
 
+		newList.innerHTML = `<div class="card__title">
+								<div class="card__name">${task.name}</div>
+								<div class="card__option">
+									<div class="card__option-addthis"><span class="icon-addthis"></span></div>
+									<div class="card__option-color"><span class="icon-color_lens"> <input type="color" name="" id=""></span></div>
+									<div class="card__option-pencil"><span class="icon-pencil"></span></div>
+									<div class="card__option-bin"><span class="icon-bin"></span></div>
+								</div>
+							</div>
+							<div class="card__content"></div>`
+		parent.append(newList);
+		deleteText = document.querySelectorAll('.card__text-bin .icon-bin');
+		cardText = document.querySelectorAll('.card__text');
+		renameText = document.querySelectorAll('.card__text-pencil .icon-pencil');
+		name = document.querySelectorAll('.card__text p');
+		addThis = document.querySelectorAll('.card__option-addthis .icon-addthis');
+		cardContent = document.querySelectorAll('.card__content');
+		item = document.querySelectorAll('.card__item');
+		binCard = document.querySelectorAll('.card__option-bin .icon-bin');
+		renameCard = document.querySelectorAll('.card__option-pencil .icon-pencil');
+		nameItem = document.querySelectorAll('.card__name');
+	});
 
 
 
 	// отображаем на странице данные из массива с пунктами
+	itemCard.forEach((task, i) => {
+		if (task.children.length > 0) {
+			task.children.forEach(item => {
+				const div = document.createElement('div');
+				div.classList.add('card__text');
+				div.setAttribute('draggable', 'true');
+				div.setAttribute('id', `${item.id}`); // добавили нашему пункту id	
+					div.innerHTML = `<p> ${item.name} </p>
+									 <div class="card__text-active">
+										<div class="card__text-pencil"><span class="icon-pencil"></span></div>
+										<div class="card__text-bin"><span class="icon-bin"></span></div>
+									 </div>`;
+				cardContent[i].append(div)
+			})
+		}
+	});
 
-	// tasks.forEach(task => {
-	// 	const div = document.createElement('div');
-	// 	div.classList.add('card__text');
-	// 	div.setAttribute('draggable', 'true');
-	// 	div.setAttribute('id', `${task.id}`); // добавили нашему пункту id
-	// 	div.setAttribute('data-number', `${task.numberItem}`); // добавили нашему пункту data атрибут
-
-	// 		div.innerHTML = `<p> ${task.text} </p>
-	// 						 <div class="card__text-active">
-	// 							<div class="card__text-pencil"><span class="icon-pencil"></span></div>
-	// 							<div class="card__text-bin"><span class="icon-bin"></span></div>
-	// 						 </div>`;
-	// 	cardContent[task.numberItem].append(div);  // сделать чтобы после перезагрузки пункты оставались в своих карточках
-		
-
-	// 	deleteText = document.querySelectorAll('.card__text-bin .icon-bin');
-	// 	cardText = document.querySelectorAll('.card__text');
-	// 	renameText = document.querySelectorAll('.card__text-pencil .icon-pencil');
-	// 	name = document.querySelectorAll('.card__text p');
-
-	// });
 
 
 
 	
-	// отображаем на странице данные из массива с карточками
-
-	// itemCard.forEach(task => {
-	// 	const newList = document.createElement('div');
-	// 	newList.classList.add('card__item');
-	// 	newList.setAttribute('id', `${task.id}`); // добавили нашему пункту id
-	// 	newList.setAttribute('data-number', `${task.numberItem}`); // добавили нашему пункту data атрибут
-	// 	newList.setAttribute('data-color', `${task.bg}`);
 
 
-	// 	newList.innerHTML = `<div class="card__title">
-	// 							<div class="card__name">${task.text}</div>
-	// 							<div class="card__option">
-	// 								<div class="card__option-addthis"><span class="icon-addthis"></span></div>
-	// 								<div class="card__option-color"><span class="icon-color_lens"> <input type="color" name="" id=""></span></div>
-	// 								<div class="card__option-pencil"><span class="icon-pencil"></span></div>
-	// 								<div class="card__option-bin"><span class="icon-bin"></span></div>
-	// 							</div>
-	// 						</div>
-	// 						<div class="card__content"></div>`
-		
-	// 	parent.append(newList);
-	// 	deleteText = document.querySelectorAll('.card__text-bin .icon-bin');
-	// 	cardText = document.querySelectorAll('.card__text');
-	// 	renameText = document.querySelectorAll('.card__text-pencil .icon-pencil');
-	// 	name = document.querySelectorAll('.card__text p');
-	// 	addThis = document.querySelectorAll('.card__option-addthis .icon-addthis');
-	// 	cardContent = document.querySelectorAll('.card__content');
-	// 	console.log(cardContent);
-	// });
+
 
 
 
@@ -169,8 +157,76 @@ window.addEventListener('DOMContentLoaded', () => {
 	// }
 	
 	
+	
+	
+	
+	// добавление новой карточки
+	
+	// а стоит ли давать карточке атрибут data-name или без него сделать, если без него то убрать лишнее
+
+	function addNewList() {
+		const newList = document.createElement('div');
+		let name = prompt('Введите название листа', '');
+		
+		
+		newList.setAttribute('data-name', `${name}`);  // ??
 
 
+		const newCard = {
+			id: Date.now(),	
+			name: newList.dataset.name,   // ???
+			children: []
+			
+		}
+		
+		newList.setAttribute('id', `${newCard.id}`); // добавили нашему пункту id
+
+
+		if (name != null && name != '') {
+			newList.classList.add('card__item');
+			newList.innerHTML = `<div class="card__title">
+									<div class="card__name">${newCard.name}</div>
+									<div class="card__option">
+										<div class="card__option-addthis"><span class="icon-addthis"></span></div>
+										<div class="card__option-color"><span class="icon-color_lens"> <input type="color" name="" id=""></span></div>
+										<div class="card__option-pencil"><span class="icon-pencil"></span></div>
+										<div class="card__option-bin"><span class="icon-bin"></span></div>
+									</div>
+								</div>
+								<div class="card__content"></div>`
+			parent.append(newList);
+		}
+
+		
+		
+
+		// добавление задачи в массив с задачами
+
+		itemCard.push(newCard);
+		saveToLocalStorageCard();
+
+
+		renameCard = document.querySelectorAll('.card__option-pencil .icon-pencil');
+		addThis = document.querySelectorAll('.card__option-addthis .icon-addthis');
+		cardContent = document.querySelectorAll('.card__content');
+		binCard = document.querySelectorAll('.card__option-bin .icon-bin');
+		item = document.querySelectorAll('.card__item');
+		nameItem = document.querySelectorAll('.card__name');
+		name = document.querySelectorAll('.card__text p');
+		cardText = document.querySelectorAll('.card__text');
+		cardTitle = document.querySelectorAll('.card__title');
+		input = document.querySelectorAll('.card__option-color input');
+		return renameCard, addThis, cardContent, binCard, item, nameItem, name, cardText, cardTitle, input, newCard;
+		
+	}
+
+	globalAdd.addEventListener('click', () => addNewList());
+
+
+
+	// добавить в объкет еще children, и внутри для каждого добавить id
+
+	// 
 
 	// добавление пункта в карточку
 
@@ -180,7 +236,17 @@ window.addEventListener('DOMContentLoaded', () => {
 		div.classList.add('card__text');
 		div.setAttribute('draggable', 'true');
 
-		let text = prompt('Введите название пункта', '').trim();
+		let text = prompt('Введите название пункта', '');
+
+
+		
+		// newCard.children = Date.now();
+		
+		const itemChildren = {
+			id: Date.now(),
+			name: text
+		}
+
 
 		if (text != null && text != '') {
 			div.innerHTML = `<p>${text}</p>
@@ -191,7 +257,9 @@ window.addEventListener('DOMContentLoaded', () => {
 			
 			cardContent[j].append(div);
 		} 
-		
+		// console.log(itemCard)
+		itemCard[j].children.push(itemChildren)
+		saveToLocalStorageCard();
 		
 		
 		renameText = document.querySelectorAll('.card__text-pencil .icon-pencil');
@@ -220,56 +288,30 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
 
-	// добавление новой карточки
-
-	function addNewList() {
-		const newList = document.createElement('div');
-		let name = prompt('Введите название листа', '');
-
-		if (name != null && name != '') {
-			newList.classList.add('card__item');
-			newList.innerHTML = `<div class="card__title">
-									<div class="card__name">${name}</div>
-									<div class="card__option">
-										<div class="card__option-addthis"><span class="icon-addthis"></span></div>
-										<div class="card__option-color"><span class="icon-color_lens"> <input type="color" name="" id=""></span></div>
-										<div class="card__option-pencil"><span class="icon-pencil"></span></div>
-										<div class="card__option-bin"><span class="icon-bin"></span></div>
-									</div>
-								</div>
-								<div class="card__content"></div>`
-			parent.append(newList);
-		}
-
-		renameCard = document.querySelectorAll('.card__option-pencil .icon-pencil');
-		addThis = document.querySelectorAll('.card__option-addthis .icon-addthis');
-		cardContent = document.querySelectorAll('.card__content');
-		binCard = document.querySelectorAll('.card__option-bin .icon-bin');
-		item = document.querySelectorAll('.card__item');
-		nameItem = document.querySelectorAll('.card__name');
-		name = document.querySelectorAll('.card__text p');
-		cardText = document.querySelectorAll('.card__text');
-		cardTitle = document.querySelectorAll('.card__title');
-		input = document.querySelectorAll('.card__option-color input');
-		return renameCard, addThis, cardContent, binCard, item, nameItem, name, cardText, cardTitle, input;
-		
-	}
-
-	globalAdd.addEventListener('click', () => addNewList());
 
 
 
 
-	//универсальная функция по изменению названия картчоки и пунктов в карточке
+	//универсальная функция по изменению названия карточки и пунктов в карточке
 
 	function renameClick(selectorPen, rename, target) {
 		if (target && target.matches(selectorPen)) {
-			rename.forEach((item, k) => {
-				if (target == item) {
+			rename.forEach((it, k) => {
+				if (target == it) {
 					if (selectorPen == '.card__text-pencil .icon-pencil') {
 						name[k].textContent = prompt('Введите новое название', '')
 					} else if (selectorPen == '.card__option-pencil .icon-pencil') {
-						nameItem[k].textContent = prompt('Введите новое название', '')
+						let nameCard = prompt('Введите новое название', '');
+						
+						nameItem[k].textContent = nameCard;
+						let id = Number(item[k].id);
+
+						//находим индекс задачи в массиве
+						const index = itemCard.find((item) => item.id === id);
+
+						// меняем карточке в массиве
+						index.name = nameCard
+						saveToLocalStorageCard();
 					}
 				}
 			});
@@ -291,6 +333,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
 
+
 	// универсальные функции по удалению карточки/пунтка в карточке
 
 	function deleteContent(textDelete, k) {
@@ -306,7 +349,10 @@ window.addEventListener('DOMContentLoaded', () => {
 		binCard = document.querySelectorAll('.card__option-bin .icon-bin');
 		item = document.querySelectorAll('.card__item');
 		cardContent = document.querySelectorAll('.card__content');
-		return binCard, item, renameText, name, deleteText, cardText, cardContent;
+		addThis = document.querySelectorAll('.card__option-addthis .icon-addthis');
+		renameCard = document.querySelectorAll('.card__option-pencil .icon-pencil');
+		nameItem = document.querySelectorAll('.card__name');
+		return binCard, item, renameText, name, deleteText, cardText, cardContent, addThis, renameCard, nameItem;
 	}
 
 
@@ -318,7 +364,21 @@ window.addEventListener('DOMContentLoaded', () => {
 					if (selectorBin == '.card__text-bin .icon-bin') {
 						deleteContent(cardText, k)
 					} else if (selectorBin == '.card__option-bin .icon-bin') {
-						deleteContent(item, k)
+						// определяем id задачи
+						let id = Number(item[k].id);
+
+						//находим индекс задачи в массиве
+						const index = itemCard.findIndex((item) => item.id === id);
+
+						// удаляем задачу из массива
+						itemCard.splice(index, 1);
+						saveToLocalStorageCard();
+
+						// удаляем карточку со страницы
+						deleteContent(item, k);
+						
+						
+						
 					}
 				}
 			});
@@ -374,20 +434,11 @@ window.addEventListener('DOMContentLoaded', () => {
 	});
 
 
-
-
-
-
-	// сохранение данных в local storage для пунктов
-
-	// const saveToLocalStorage = () => localStorage.setItem('tasks', JSON.stringify(tasks)); // каждый раз при вызове это функции у нас будет происходить сохранение нашего массива в local storage
-
-
-
-
+	
 	// сохранение данных в local storage для карточек
 
-	// const saveToLocalStorageCard = () => localStorage.setItem('itemCard', JSON.stringify(itemCard)); // каждый раз при вызове это функции у нас будет происходить сохранение нашего массива в local storage
+	const saveToLocalStorageCard = () => localStorage.setItem('itemCard', JSON.stringify(itemCard));
+	// каждый раз при вызове это функции у нас будет происходить сохранение нашего массива в local storage
 
 
 
