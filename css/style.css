@@ -243,6 +243,12 @@ h1,h2,h3,h4,h5,h6 {	font-size: inherit;	font-weight: 400;}
 	transition: all 0.5s;
 }
 
+@media (max-width: 768px) {	
+	.card__text-active{
+		opacity: 1;
+	}
+}
+
 .card__text-active div{
 	display: inline-block;
 	max-height: 100%;

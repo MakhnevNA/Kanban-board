@@ -30,9 +30,11 @@ window.addEventListener('DOMContentLoaded', () => {
 	if (localStorage.getItem('itemCard')) {
 		itemCard = JSON.parse(localStorage.getItem('itemCard'));
 		cardContent = document.querySelectorAll('.card__content');
-		console.log(itemCard.children)
+		cardText = document.querySelectorAll('.card__text');
+		// console.log(itemCard.children)
 	}
 	
+
 	// отображаем на странице данные из массива с карточками
 
 	itemCard.forEach((task, i) => {
@@ -81,6 +83,9 @@ window.addEventListener('DOMContentLoaded', () => {
 				cardContent[i].append(div)
 			})
 		}
+		renameText = document.querySelectorAll('.card__text-pencil .icon-pencil');
+		name = document.querySelectorAll('.card__text p');
+		cardText = document.querySelectorAll('.card__text');
 	});
 
 
@@ -216,7 +221,8 @@ window.addEventListener('DOMContentLoaded', () => {
 		cardText = document.querySelectorAll('.card__text');
 		cardTitle = document.querySelectorAll('.card__title');
 		input = document.querySelectorAll('.card__option-color input');
-		return renameCard, addThis, cardContent, binCard, item, nameItem, name, cardText, cardTitle, input, newCard;
+		renameText = document.querySelectorAll('.card__text-pencil .icon-pencil');
+		return renameCard, addThis, cardContent, binCard, item, nameItem, name, cardText, cardTitle, input, newCard, renameText;
 		
 	}
 
@@ -235,6 +241,7 @@ window.addEventListener('DOMContentLoaded', () => {
 		const div = document.createElement('div');
 		div.classList.add('card__text');
 		div.setAttribute('draggable', 'true');
+		
 
 		let text = prompt('Введите название пункта', '');
 
@@ -246,7 +253,7 @@ window.addEventListener('DOMContentLoaded', () => {
 			id: Date.now(),
 			name: text
 		}
-
+		div.setAttribute('id', itemChildren.id)
 
 		if (text != null && text != '') {
 			div.innerHTML = `<p>${text}</p>
@@ -257,16 +264,16 @@ window.addEventListener('DOMContentLoaded', () => {
 			
 			cardContent[j].append(div);
 		} 
-		// console.log(itemCard)
 		itemCard[j].children.push(itemChildren)
 		saveToLocalStorageCard();
-		
+		console.log(itemCard)
 		
 		renameText = document.querySelectorAll('.card__text-pencil .icon-pencil');
 		name = document.querySelectorAll('.card__text p');
 		deleteText = document.querySelectorAll('.card__text-bin .icon-bin');
 		cardText = document.querySelectorAll('.card__text');
 		cardContent = document.querySelectorAll('.card__content');
+		
 		return renameText, name, deleteText, cardText, cardContent;
 	}
 	
@@ -299,23 +306,53 @@ window.addEventListener('DOMContentLoaded', () => {
 			rename.forEach((it, k) => {
 				if (target == it) {
 					if (selectorPen == '.card__text-pencil .icon-pencil') {
-						name[k].textContent = prompt('Введите новое название', '')
+						let nameText = prompt('Введите новое название', '');
+
+						if (nameText != "" && nameText != null) {
+
+							name[k].textContent = nameText;
+
+							let id = Number(cardText[k].id);	
+
+
+							//находим индекс задачи в массиве
+							
+							itemCard.forEach(item => {
+								const index = item.children.find((it) => it.id === id);
+
+								if (index) {
+
+									// меняем имя пункта в массиве
+									index.name = nameText;
+									saveToLocalStorageCard();
+								}
+							});
+						}
 					} else if (selectorPen == '.card__option-pencil .icon-pencil') {
 						let nameCard = prompt('Введите новое название', '');
+
+						if (nameCard != '' && nameCard != null) {
+							nameItem[k].textContent = nameCard;
+							let id = Number(item[k].id);
+
+							//находим индекс задачи в массиве
+							const index = itemCard.find((item) => item.id === id);
+							console.log(index)
+
+							// меняем имя карточки в массиве
+							index.name = nameCard
+							saveToLocalStorageCard();
+						}
 						
-						nameItem[k].textContent = nameCard;
-						let id = Number(item[k].id);
-
-						//находим индекс задачи в массиве
-						const index = itemCard.find((item) => item.id === id);
-
-						// меняем карточке в массиве
-						index.name = nameCard
-						saveToLocalStorageCard();
+						
 					}
 				}
 			});
 		}
+		renameText = document.querySelectorAll('.card__text-pencil .icon-pencil');
+		name = document.querySelectorAll('.card__text p');
+		cardText = document.querySelectorAll('.card__text');
+		return renameText, name, cardText;
 	}
 
 
@@ -362,7 +399,11 @@ window.addEventListener('DOMContentLoaded', () => {
 			del.forEach((it, k) => {
 				if (target == it) {
 					if (selectorBin == '.card__text-bin .icon-bin') {
+
+						
 						deleteContent(cardText, k)
+
+
 					} else if (selectorBin == '.card__option-bin .icon-bin') {
 						// определяем id задачи
 						let id = Number(item[k].id);
@@ -434,7 +475,7 @@ window.addEventListener('DOMContentLoaded', () => {
 	});
 
 
-	
+
 	// сохранение данных в local storage для карточек
 
 	const saveToLocalStorageCard = () => localStorage.setItem('itemCard', JSON.stringify(itemCard));
