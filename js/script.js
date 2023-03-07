@@ -21,17 +21,14 @@ window.addEventListener('DOMContentLoaded', () => {
 		cardText = document.querySelectorAll('.card__text'),
 		nameItem = document.querySelectorAll('.card__name'),
 		cardTitle = document.querySelectorAll('.card__title'),
-		input = document.querySelectorAll('.card__option-color input'),
 		itemCard = [];
 	
 
+	
 	// если в lS есть какие-то данные, то мы их от туда поулчим и запишем в наш массив
 	
 	if (localStorage.getItem('itemCard')) {
 		itemCard = JSON.parse(localStorage.getItem('itemCard'));
-		cardContent = document.querySelectorAll('.card__content');
-		cardText = document.querySelectorAll('.card__text');
-		// console.log(itemCard.children)
 	}
 	
 
@@ -46,7 +43,6 @@ window.addEventListener('DOMContentLoaded', () => {
 								<div class="card__name">${task.name}</div>
 								<div class="card__option">
 									<div class="card__option-addthis"><span class="icon-addthis"></span></div>
-									<div class="card__option-color"><span class="icon-color_lens"> <input type="color" name="" id=""></span></div>
 									<div class="card__option-pencil"><span class="icon-pencil"></span></div>
 									<div class="card__option-bin"><span class="icon-bin"></span></div>
 								</div>
@@ -75,111 +71,30 @@ window.addEventListener('DOMContentLoaded', () => {
 				div.classList.add('card__text');
 				div.setAttribute('draggable', 'true');
 				div.setAttribute('id', `${item.id}`); // добавили нашему пункту id	
-					div.innerHTML = `<p> ${item.name} </p>
-									 <div class="card__text-active">
-										<div class="card__text-pencil"><span class="icon-pencil"></span></div>
-										<div class="card__text-bin"><span class="icon-bin"></span></div>
-									 </div>`;
+				div.innerHTML = `<p> ${item.name} </p>
+								 <div class="card__text-active">
+									<div class="card__text-pencil"><span class="icon-pencil"></span></div>
+									<div class="card__text-bin"><span class="icon-bin"></span></div>
+								 </div>`;
 				cardContent[i].append(div)
-			})
+			});
 		}
 		renameText = document.querySelectorAll('.card__text-pencil .icon-pencil');
 		name = document.querySelectorAll('.card__text p');
 		cardText = document.querySelectorAll('.card__text');
+		deleteText = document.querySelectorAll('.card__text-bin .icon-bin');
 	});
-
-
-
-
-	
-
-
-
-
-
-
-
-
-	// добавление пункта в карточку
-	
-	
-	// function addText(j) {
-		
-	// 	const div = document.createElement('div');
-	// 	div.classList.add('card__text');
-	// 	div.setAttribute('draggable', 'true');
-
-		
-	// 		let text = prompt('Введите название пункта', '').trim();
-
-			
-	// 		const newTask = {
-	// 			id: Date.now(),
-	// 			text: text,
-	// 			numberItem: j
-	// 		}
-			
-
-	// 		if (text != null && text != '') {
-
-				
-				
-	// 			div.innerHTML = `<p>${newTask.text}</p>
-	// 							<div class="card__text-active">
-	// 								<div class="card__text-pencil"><span class="icon-pencil"></span></div>
-	// 								<div class="card__text-bin"><span class="icon-bin"></span></div>
-	// 							</div>`
-				
-				
-				
-	// 			// описали задачу в виде объекта
-				
-	// 			// div.setAttribute('id', `${newTask.id}`); // добавили нашему пункту id
-	// 			// div.setAttribute('data-number', `${newTask.numberItem}`); // добавили нашему пункту data атрибут
-	// 			// // div.setAttribute('data-cardOfNumber', `${newTask.numberItem}`);
-
-				
-
-	// 			cardContent[j].append(div);
-
-
-	// 			// добавление задачи в массив с задачами
-				
-	// 			tasks.push(newTask);
-	// 			saveToLocalStorage();
-
-	// 		} 
-		
-		
-		
-	// 	renameText = document.querySelectorAll('.card__text-pencil .icon-pencil');
-	// 	name = document.querySelectorAll('.card__text p');
-	// 	deleteText = document.querySelectorAll('.card__text-bin .icon-bin');
-	// 	cardText = document.querySelectorAll('.card__text');
-	// 	cardContent = document.querySelectorAll('.card__content');
-	// 	console.log(cardContent);
-	// 	return renameText, name, deleteText, cardText, newTask, cardContent;
-	// }
-	
-	
-	
 	
 	
 	// добавление новой карточки
-	
-	// а стоит ли давать карточке атрибут data-name или без него сделать, если без него то убрать лишнее
 
 	function addNewList() {
 		const newList = document.createElement('div');
 		let name = prompt('Введите название листа', '');
-		
-		
-		newList.setAttribute('data-name', `${name}`);  // ??
-
 
 		const newCard = {
-			id: Date.now(),	
-			name: newList.dataset.name,   // ???
+			id: Date.now(),
+			name: name,
 			children: []
 			
 		}
@@ -193,7 +108,6 @@ window.addEventListener('DOMContentLoaded', () => {
 									<div class="card__name">${newCard.name}</div>
 									<div class="card__option">
 										<div class="card__option-addthis"><span class="icon-addthis"></span></div>
-										<div class="card__option-color"><span class="icon-color_lens"> <input type="color" name="" id=""></span></div>
 										<div class="card__option-pencil"><span class="icon-pencil"></span></div>
 										<div class="card__option-bin"><span class="icon-bin"></span></div>
 									</div>
@@ -220,19 +134,14 @@ window.addEventListener('DOMContentLoaded', () => {
 		name = document.querySelectorAll('.card__text p');
 		cardText = document.querySelectorAll('.card__text');
 		cardTitle = document.querySelectorAll('.card__title');
-		input = document.querySelectorAll('.card__option-color input');
 		renameText = document.querySelectorAll('.card__text-pencil .icon-pencil');
-		return renameCard, addThis, cardContent, binCard, item, nameItem, name, cardText, cardTitle, input, newCard, renameText;
+		return renameCard, addThis, cardContent, binCard, item, nameItem, name, cardText, cardTitle, newCard, renameText;
 		
 	}
 
 	globalAdd.addEventListener('click', () => addNewList());
 
 
-
-	// добавить в объкет еще children, и внутри для каждого добавить id
-
-	// 
 
 	// добавление пункта в карточку
 
@@ -245,9 +154,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
 		let text = prompt('Введите название пункта', '');
 
-
-		
-		// newCard.children = Date.now();
 		
 		const itemChildren = {
 			id: Date.now(),
@@ -256,7 +162,7 @@ window.addEventListener('DOMContentLoaded', () => {
 		div.setAttribute('id', itemChildren.id)
 
 		if (text != null && text != '') {
-			div.innerHTML = `<p>${text}</p>
+			div.innerHTML = `<p>${itemChildren.name}</p>
 							<div class="card__text-active">
 								<div class="card__text-pencil"><span class="icon-pencil"></span></div>
 								<div class="card__text-bin"><span class="icon-bin"></span></div>
@@ -266,8 +172,7 @@ window.addEventListener('DOMContentLoaded', () => {
 		} 
 		itemCard[j].children.push(itemChildren)
 		saveToLocalStorageCard();
-		console.log(itemCard)
-		
+
 		renameText = document.querySelectorAll('.card__text-pencil .icon-pencil');
 		name = document.querySelectorAll('.card__text p');
 		deleteText = document.querySelectorAll('.card__text-bin .icon-bin');
@@ -288,13 +193,7 @@ window.addEventListener('DOMContentLoaded', () => {
 				}
 			});
 		}
-
-
 	});
-
-
-
-
 
 
 
@@ -314,14 +213,12 @@ window.addEventListener('DOMContentLoaded', () => {
 
 							let id = Number(cardText[k].id);	
 
-
 							//находим индекс задачи в массиве
 							
 							itemCard.forEach(item => {
 								const index = item.children.find((it) => it.id === id);
 
 								if (index) {
-
 									// меняем имя пункта в массиве
 									index.name = nameText;
 									saveToLocalStorageCard();
@@ -337,14 +234,11 @@ window.addEventListener('DOMContentLoaded', () => {
 
 							//находим индекс задачи в массиве
 							const index = itemCard.find((item) => item.id === id);
-							console.log(index)
 
 							// меняем имя карточки в массиве
 							index.name = nameCard
 							saveToLocalStorageCard();
 						}
-						
-						
 					}
 				}
 			});
@@ -400,11 +294,31 @@ window.addEventListener('DOMContentLoaded', () => {
 				if (target == it) {
 					if (selectorBin == '.card__text-bin .icon-bin') {
 
+						// Определяем id задачи
+						let id = Number(cardText[k].id);
 						
-						deleteContent(cardText, k)
-
+						//находим индекс задачи в массиве
+						
+						itemCard.forEach(item => {
+							const index = item.children.find((it) => it.id === id);
+							
+							if (index !== undefined) {
+								// удаляем задачу из массива
+								itemCard.forEach(item => {
+									item.children.forEach(it => {
+										if (it.id == index.id) {
+											item.children.splice(it, 1)
+										}
+									})
+								}); 
+								saveToLocalStorageCard();
+								// удаляем карточку со страницы
+								deleteContent(cardText, k);
+							}
+						});
 
 					} else if (selectorBin == '.card__option-bin .icon-bin') {
+
 						// определяем id задачи
 						let id = Number(item[k].id);
 
@@ -417,9 +331,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
 						// удаляем карточку со страницы
 						deleteContent(item, k);
-						
-						
-						
 					}
 				}
 			});
@@ -438,177 +349,12 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
 	
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	// измение bg у заголовка
-	
-	function changeColor(i) {
-		let color = input[i].value;
-		// cardTitle[i].setAttribute('data-color', `${color}`);
-		cardTitle[i].style.backgroundColor = `${color}`;
-		
-		return color;
-	}
-
-	parent.addEventListener('change', (e) => {
-		const target = e.target;
-		if (target && target.matches('.card__option-color input')) {
-			input.forEach((item, i) => {
-				if (item == target) {
-					changeColor(i)
-				}
-			})
-		}
-	});
-
 
 
 	// сохранение данных в local storage для карточек
 
 	const saveToLocalStorageCard = () => localStorage.setItem('itemCard', JSON.stringify(itemCard));
 	// каждый раз при вызове это функции у нас будет происходить сохранение нашего массива в local storage
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	// drag and drop
-
-	// через делегирование делать
-	// теперь у новых пунктов в статичном списке все норм
-	// а у пунктов в созданной карточке плохо
-
-
-	// parent.addEventListener('dragstart', (e) => {
-	// 	const target = e.target;
-
-	// 	if (target && target.classList.contains('card__text')) {
-	// 		cardText.forEach((item, i) => {
-	// 			if (target == item) {
-	// 				item.classList.add('dragging');
-	// 			}
-	// 		});
-	// 	}
-	// });
-
-	// parent.addEventListener('dragend', (e) => {
-	// 	const target = e.target;
-
-	// 	if (target && target.classList.contains('card__text')) {
-	// 		cardText.forEach((item, i) => {
-	// 			if (target == item) {
-	// 				item.classList.remove('dragging');
-	// 			}
-	// 		});
-	// 	}
-	// });
-	
-
-// 	parent.addEventListener('dragover', (e) => {
-// 		const target = e.target;
-// 		e.preventDefault();
-// 		if (target && target.classList.contains('card__content')) {
-// 			cardContent.forEach((item) => {
-// 				e.preventDefault();
-// 				const afterElement = getDragAfterElement(item, e.clientY); // присвоим значение функции это переменной
-// 				let draggable = document.querySelector('.dragging');
-// 				// getDragAfterElement(item, e.clientY);
-// 				getDragAfterElement(item, e.clientY);
-// 				if (target == item && afterElement == null) {
-					
-// 					item.appendChild(draggable);
-// 				} else  {
-// 					item.insertBefore(draggable, afterElement)
-// 				} 
-// 				// getDragAfterElement(item, e.clientY, i);
-// 				// if (afterElement == null) {
-// 				// 	item.appendChild(draggable);
-// 				// } else {
-// 				// 	item.insertBefore(draggable, afterElement)
-// 				// }
-// 			});
-// 		}
-// 	});
-	
-// // определение между каким элементами мы находимся
-	
-// 	// определяет положение мыши, когда мы перетаскиваем элемент
-// 	function getDragAfterElement(item, y) {
-// 		const draggableElements = [...item.querySelectorAll('.card__text:not(.dragging)')]; // исключаем элемент, который сейчас держим.и со спредом преобразовываем в массив
-// 		return draggableElements.reduce((closest, child) => {
-// 			const box = child.getBoundingClientRect();
-// 			const offset = y - box.top - box.height/2;
-// 			if (offset < 0 && offset > closest.offset) {
-// 				return { offset: offset, element:child }
-// 			} else {
-// 				return closest;
-// 			}
-// 		}, {offset: Number.NEGATIVE_INFINITY}).element 
-// 	}
-
-	// function getDragAfterElement(item, y, i) {
-	// 	const draggableElements = [...item.querySelectorAll('.card__text:not(.dragging)')]; // исключаем элемент, который сейчас держим.и со спредом преобразовываем в массив
-	// 	draggableElements.reduce((closest, child) => {
-	// 		const box = child.getBoundingClientRect();
-	// 		const offset = y - box.top - box.height / 2;
-	// 		console.log(offset);
-	// 		// if (offset < 0 && offset > closest.offset) {
-	// 		// 	return { offset: offset, element: child }
-	// 		// } else {
-	// 		// 	return closest;
-	// 		// }
-	// 	}, { offset: Number.NEGATIVE_INFINITY })
-	// }
-
-
-
 
 
 });

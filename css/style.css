@@ -19,31 +19,25 @@ h1,h2,h3,h4,h5,h6 {	font-size: inherit;	font-weight: 400;}
 
 /*                                                                                            */
 .wrapper{
-	background-color: rgb(234, 147, 17);
+	background-color: rgb(171, 229, 105);
 }
 
 .container {
 	max-width: 1400px; 
 	margin: 0 auto;
 	min-height: 700px;
-	border: 1px solid red;
-
 	display: flex;
-	/* justify-content: space-between; */
 	flex-wrap: wrap;
 	padding-top: 40px;
 	position: relative;
 	top: 0;
 	left: 0;
-
-
 }
 
 
 
 .global__option-addthis{
 	cursor: pointer;
-	/* margin: 15px 15px; */
 	position: absolute;
 	top: 10px;
 	left: 50%;
@@ -55,8 +49,6 @@ h1,h2,h3,h4,h5,h6 {	font-size: inherit;	font-weight: 400;}
 	font-size: 28px;
 	display: block;
 	cursor: pointer;
-	/* margin: 15px 15px; */
-
 }
 
 
@@ -66,21 +58,24 @@ h1,h2,h3,h4,h5,h6 {	font-size: inherit;	font-weight: 400;}
 	min-height: 213px;
 	height: 100%;
 	width: 436px;
-	/* flex: 1 1 auto; */
-	
-	/* max-width: 662px; */
 	margin: 15px;
 	background-color: rgb(230, 230, 230);
-	display: flex; 
-	/* align-items: center; */
+	display: flex;
 	flex-direction: column; 
 }
 
+@media (max-width:1401px){
+	.card__item{
+		flex: 1 0 auto;
+	}
+	
+}
 
 
 @media (max-width:1025px){
 	.card__item{
-		flex: 1 1 100%;
+		flex: 1 1 auto;
+		max-width: none;
 	}
 	
 }
@@ -94,9 +89,7 @@ h1,h2,h3,h4,h5,h6 {	font-size: inherit;	font-weight: 400;}
 		max-width: none;
 		width: 100%;
 		flex: 1 1 auto;
-
 	}
-	
 }
 
 
@@ -138,7 +131,10 @@ h1,h2,h3,h4,h5,h6 {	font-size: inherit;	font-weight: 400;}
 	overflow: hidden;
 	height: 100%;
 	display: flex;
+	justify-content: center;
 	align-items: center;
+	/* width: 100%; */
+	flex: 1 1 auto;
 
 
 }
